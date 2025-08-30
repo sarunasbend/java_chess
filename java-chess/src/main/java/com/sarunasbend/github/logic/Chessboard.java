@@ -1,13 +1,18 @@
 package com.sarunasbend.github.logic;
 
 import java.awt.image.BufferedImage;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import com.sarunasbend.github.utility.Constants;
 
 public class Chessboard {
     private BufferedImage chessboardImage;
+
+    private Font font;
 
     public void init(){
         drawChessboard();
@@ -18,11 +23,13 @@ public class Chessboard {
         Graphics g = this.chessboardImage.createGraphics();
         Graphics2D g2d = (Graphics2D) g;
 
+        // g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
         boolean isWhite = true;
         int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
 
-        for (int row = 0; row < Constants.CHESSBOARD_HEIGHT; row++){
-            for (int column = 0; column < Constants.CHESSBOARD_WIDTH; column++){
+        for (int row = 0; row < Constants.CHESSBOARD_ROWS; row++){
+            for (int column = 0; column < Constants.CHESSBOARD_COLUMNS; column++){
                 if (isWhite){
                     g2d.setColor(Constants.WHITE_COLOUR);
                     g2d.fillRect(column * blockSize, row * blockSize, blockSize, blockSize);
@@ -35,6 +42,36 @@ public class Chessboard {
             isWhite = !isWhite;
         }
 
+        this.font = g2d.getFont();
+        this.font = this.font.deriveFont(this.font.getSize() * 2.0f);
+        g2d.setFont(this.font);
+
+        FontMetrics fm = g2d.getFontMetrics(this.font);
+        int padding = 5;
+        
+        for (int row = Constants.CHESSBOARD_ROWS; row > 0; row--){
+            if (row % 2 != 0){
+                g2d.setColor(Constants.BLACK_COLOR);
+            } else {
+                g2d.setColor(Constants.WHITE_COLOUR);
+            }
+            g2d.drawString(Integer.toString(Constants.CHESSBOARD_ROWS - row + 1), 0, (row * blockSize) - 1);
+        }
+
+        for (int column = 0; column < Constants.CHESSBOARD_COLUMNS; column++) {
+            if (column % 2 != 0) {
+                g2d.setColor(Constants.BLACK_COLOR);
+            } else {
+                g2d.setColor(Constants.WHITE_COLOUR);
+            }
+
+            String text = Character.toString((char) (column + 65));
+            
+            int x = (column * blockSize) + blockSize - fm.stringWidth(text) - 1;
+            int y = Constants.CHESSBOARD_HEIGHT - fm.getDescent() + padding;
+
+            g2d.drawString(text, x, y);
+        }
         g2d.dispose();
     }
 
