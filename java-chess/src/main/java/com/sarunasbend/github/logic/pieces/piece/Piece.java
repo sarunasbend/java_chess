@@ -1,8 +1,8 @@
-package com.sarunasbend.github.logic.pieces;
+package com.sarunasbend.github.logic.pieces.piece;
 
 public abstract class Piece {
-    private final String id;
-    private final String name;
+    private final String id; //starting position on board "A1" would be Rook
+    private final String name; //e.g "White Rook"
     
     public Piece(String id, String name){
         this.id = id;
