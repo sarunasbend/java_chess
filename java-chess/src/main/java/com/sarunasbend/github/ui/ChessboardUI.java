@@ -37,6 +37,7 @@ public class ChessboardUI extends JPanel {
 
     public void init(){
         setSize(Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_HEIGHT);
+        setBackground(Constants.PRIMARY_COLOR);
         initListeners();
     }
 
@@ -58,33 +59,21 @@ public class ChessboardUI extends JPanel {
                 if (event.getButton() == MouseEvent.BUTTON2) {
                     lastMouseX = event.getX();
                     lastMouseY = event.getY();
-                    Debug.info("Middle Mouse Pressed");
-
+                    
+                    isMouseHeldDown = true;
                 }
             }
 
             @Override
-            public void mouseDragged(MouseEvent event){
-                if (event.getButton() == MouseEvent.BUTTON3){
-                    int dx = event.getX() - lastMouseX;
-                    int dy = event.getY() - lastMouseY;
-
-                    offsetX += dx;
-                    offsetY += dy;
-
-                    lastMouseX = event.getX();
-                    lastMouseY = event.getY();
-
-                    Debug.info("Middle Mouse Dragged");
-
-                    repaint();
-                }
+            public void mouseReleased(MouseEvent event){
+                isMouseHeldDown = false;
             }
         });
 
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent event){
+                if (isMouseHeldDown){
                     // Calculates the offset based the last pan input
                     int dx = event.getX() - lastMouseX;
                     int dy = event.getY() - lastMouseY;
@@ -98,6 +87,7 @@ public class ChessboardUI extends JPanel {
                     lastMouseY = event.getY();
 
                     repaint();
+                }
             }
         });
 
