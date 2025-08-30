@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import com.sarunasbend.github.logic.Chessboard;
 import com.sarunasbend.github.ui.ChessboardUI;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class UIManager {
     private JFrame window;
@@ -17,9 +18,9 @@ public class UIManager {
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        chessboardUI = new ChessboardUI(new Chessboard());
+        Chessboard chessboard = JavaChess.getChessboard();
+        chessboardUI = new ChessboardUI(chessboard);
         chessboardUI.init();
-
         window.add(chessboardUI);
     }
 }
