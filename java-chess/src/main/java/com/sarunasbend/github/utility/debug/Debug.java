@@ -38,7 +38,7 @@ public class Debug {
 
     public static void error(String msg) {
         if (Debug.LOG_LEVEL.getLevel() <= LogLevel.ERROR.getLevel()) {
-            System.out.println(Debug.ANSI_RED + "[ERRROR] " + msg + Debug.ANSI_RESET);
+            System.out.println(Debug.ANSI_RED + "[ERROR] " + msg + Debug.ANSI_RESET);
         }
     }
 }
