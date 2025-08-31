@@ -17,12 +17,13 @@ import com.sarunasbend.github.ui.pieces.PawnUI;
 import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.ui.pieces.QueenUI;
 import com.sarunasbend.github.ui.pieces.RookUI;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class PiecesUI {
     private Pieces whitePieces;
     private Pieces blackPieces;
 
-    private ArrayList<PieceUI> piecesUI;
+    private ArrayList<PieceUI> piecesUI = new ArrayList<>();
 
     public PiecesUI(Pieces whitePieces, Pieces blackPieces){
         this.whitePieces = whitePieces;
@@ -62,4 +63,6 @@ public class PiecesUI {
             }
         }
     }
+
+    public ArrayList<PieceUI> getPiecesUIs(){return this.piecesUI;}
 }
