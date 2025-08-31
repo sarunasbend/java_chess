@@ -17,4 +17,7 @@ public class Constants {
 
     public static final Color PRIMARY_COLOR = Color.GRAY;
     public static final Color SECONDARY_COLOR = new Color(255,255,255);
+
+    public static final int WHITE_PIECE = 0;
+    public static final int BLACK_PIECE = 1;
 }

@@ -1,5 +1,11 @@
 package com.sarunasbend.github.ui.pieces;
 
-public class PawnUI {
-    
+import com.sarunasbend.github.logic.pieces.piece.Pawn;
+
+public class PawnUI extends PieceUI {
+    private Pawn pawn;
+
+    public PawnUI(Pawn pawn){
+        this.pawn = pawn;
+    }
 }

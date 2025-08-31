@@ -1,5 +1,11 @@
 package com.sarunasbend.github.ui.pieces;
 
-public class RookUI {
-    
+import com.sarunasbend.github.logic.pieces.piece.Rook;
+
+public class RookUI extends PieceUI {
+    private Rook rook;
+
+    public RookUI(Rook rook){
+        this.rook = rook;
+    }
 }

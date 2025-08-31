@@ -1,7 +1,18 @@
 package com.sarunasbend.github.logic.pieces.piece;
 
+import com.sarunasbend.github.logic.Chessboard;
+
 public class Rook extends Piece{
-    public Rook(String id, String name){
-        super(id, name);
-    }    
+    public Rook(String id, int colour){
+        super(id, colour);
+    }
+    
+    @Override
+    public void onPieceSelected(){}
+    
+    @Override
+    public void onPieceUnselected(){}
+
+    @Override
+    public void onMove(Chessboard chessboard){}
 }

@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 
 import com.sarunasbend.github.logic.Chessboard;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class ChessboardUI extends JPanel {
     private Chessboard chessboard;

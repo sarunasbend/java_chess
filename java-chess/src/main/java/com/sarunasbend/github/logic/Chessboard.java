@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import com.sarunasbend.github.utility.Constants;
 
@@ -22,9 +21,6 @@ public class Chessboard {
         this.chessboardImage = new BufferedImage(Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics g = this.chessboardImage.createGraphics();
         Graphics2D g2d = (Graphics2D) g;
-
-        // anti-aliasing looks kinda bad with the smaller font
-        // g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         boolean isWhite = true;
         int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;

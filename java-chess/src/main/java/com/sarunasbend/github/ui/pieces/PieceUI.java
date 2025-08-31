@@ -1,5 +1,8 @@
 package com.sarunasbend.github.ui.pieces;
 
-public class PieceUI {
-    
+import javax.swing.JPanel;
+
+public class PieceUI extends JPanel {
+    public PieceUI(){
+    }
 }
