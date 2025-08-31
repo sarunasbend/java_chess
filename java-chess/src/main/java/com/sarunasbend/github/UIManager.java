@@ -1,8 +1,11 @@
 package com.sarunasbend.github;
 
 import java.awt.GridLayout;
+import java.sql.Struct;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 
 import com.sarunasbend.github.logic.Chessboard;
 import com.sarunasbend.github.logic.pieces.Pieces;
@@ -10,6 +13,7 @@ import com.sarunasbend.github.ui.ChessboardUI;
 import com.sarunasbend.github.ui.PiecesUI;
 import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class UIManager {
     private JFrame window;
@@ -19,15 +23,10 @@ public class UIManager {
 
     public void init(){
         window = new JFrame();
-        window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(new GridLayout());
 
-        // Chessboard chessboard = ChessManager.getChessboard();
-        // chessboardUI = new ChessboardUI(chessboard);
-        // chessboardUI.init();
-        // window.add(chessboardUI);
+        Chessboard chessboard = ChessManager.getChessboard();
+        chessboardUI = new ChessboardUI(chessboard);
+        chessboardUI.init();
 
         Pieces whitePieces = ChessManager.getWhitePieces();
         whitePieces.init();
@@ -36,8 +35,30 @@ public class UIManager {
         piecesUI = new PiecesUI(whitePieces, blackPieces);
         piecesUI.init();
         
-        for (PieceUI piece : piecesUI.getPiecesUIs()){
-            window.add(piece);
+        JLayeredPane pane = new JLayeredPane();
+        pane.add(chessboardUI, JLayeredPane.DEFAULT_LAYER);
+        
+        int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
+
+        for (PieceUI chesspiece : piecesUI.getPiecesUIs()) {
+            String startPos = chesspiece.getPiece().getId();
+
+            int column = startPos.charAt(0) - 'A';
+            int row = Character.getNumericValue(startPos.charAt(1)) - 1; 
+
+            int flippedRow = (Constants.CHESSBOARD_ROWS - 1) - row;
+
+            int x = column * blockSize;
+            int y = flippedRow * blockSize;
+
+            chesspiece.setBounds(x, y, blockSize, blockSize);
+            pane.add(chesspiece, JLayeredPane.PALETTE_LAYER);
         }
+
+        window.add(pane);
+        window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        window.setVisible(true);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
     }
 }

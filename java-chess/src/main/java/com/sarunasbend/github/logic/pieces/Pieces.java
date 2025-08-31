@@ -45,7 +45,7 @@ public class Pieces {
         this.pieces.add(new Knight("B1", Constants.WHITE_PIECE));
         this.pieces.add(new Knight("G1", Constants.WHITE_PIECE));
         this.pieces.add(new Queen("D1", Constants.WHITE_PIECE));
-        this.pieces.add(new King("B1", Constants.WHITE_PIECE));
+        this.pieces.add(new King("E1", Constants.WHITE_PIECE));
         
     }
 
@@ -55,14 +55,14 @@ public class Pieces {
             this.pieces.add(new Pawn(pos, Constants.BLACK_PIECE));
         }
 
-        this.pieces.add(new Rook("A1", Constants.BLACK_PIECE));
-        this.pieces.add(new Rook("H1", Constants.BLACK_PIECE));
-        this.pieces.add(new Bishop("C1", Constants.BLACK_PIECE));
-        this.pieces.add(new Bishop("F1", Constants.BLACK_PIECE));
-        this.pieces.add(new Knight("B1", Constants.BLACK_PIECE));
-        this.pieces.add(new Knight("G1", Constants.BLACK_PIECE));
-        this.pieces.add(new Queen("D1", Constants.BLACK_PIECE));
-        this.pieces.add(new King("B1", Constants.BLACK_PIECE));
+        this.pieces.add(new Rook("A8", Constants.BLACK_PIECE));
+        this.pieces.add(new Rook("H8", Constants.BLACK_PIECE));
+        this.pieces.add(new Bishop("C8", Constants.BLACK_PIECE));
+        this.pieces.add(new Bishop("F8", Constants.BLACK_PIECE));
+        this.pieces.add(new Knight("B8", Constants.BLACK_PIECE));
+        this.pieces.add(new Knight("G8", Constants.BLACK_PIECE));
+        this.pieces.add(new Queen("D8", Constants.BLACK_PIECE));
+        this.pieces.add(new King("E8", Constants.BLACK_PIECE));
     }
     
     public ArrayList<Piece> getPices(){return this.pieces;}

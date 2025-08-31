@@ -3,16 +3,20 @@ package com.sarunasbend.github.ui.pieces;
 import javax.swing.ImageIcon;
 
 import com.sarunasbend.github.logic.pieces.piece.Rook;
+import com.sarunasbend.github.utility.Constants;
 
 public class RookUI extends PieceUI {
-    private Rook rook;
-
     public RookUI(Rook rook){
-        this.rook = rook;
+        super(rook);
         init();
     }
 
     public void init(){
-        setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\white-rook.png"));
+        if (getPiece().getColour() == Constants.WHITE_PIECE){
+            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\rook.png"));
+        } else if (getPiece().getColour() == Constants.BLACK_PIECE){
+            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\rook1.png"));
+
+        }
     }
 }

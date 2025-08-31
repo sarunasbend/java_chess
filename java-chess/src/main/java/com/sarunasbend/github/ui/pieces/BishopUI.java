@@ -3,18 +3,20 @@ package com.sarunasbend.github.ui.pieces;
 import javax.swing.ImageIcon;
 
 import com.sarunasbend.github.logic.pieces.piece.Bishop;
+import com.sarunasbend.github.utility.Constants;
 
 public class BishopUI extends PieceUI {
-    private Bishop bishop;
-    private ImageIcon imageIcon;
-
     public BishopUI(Bishop bishop){
-        this.bishop = bishop;
+        super(bishop);
         init();
     }
 
     public void init(){
-        setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\white-bishop.png"));
+        if (getPiece().getColour() == Constants.WHITE_PIECE){
+            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\bishop.png"));
+        } else if (getPiece().getColour() == Constants.BLACK_PIECE){
+            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\bishop1.png"));
+        }
     }
 }
 
