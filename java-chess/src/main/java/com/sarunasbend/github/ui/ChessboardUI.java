@@ -38,6 +38,7 @@ public class ChessboardUI extends JPanel {
         setSize(Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_HEIGHT);
         setBounds(0,0,Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_WIDTH);
         setBackground(Constants.PRIMARY_COLOR);
+        initListeners();
     }
 
     @Override
