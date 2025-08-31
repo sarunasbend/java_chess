@@ -1,9 +1,5 @@
 package com.sarunasbend.github;
 
-import java.awt.GridLayout;
-import java.sql.Struct;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
@@ -13,7 +9,6 @@ import com.sarunasbend.github.ui.ChessboardUI;
 import com.sarunasbend.github.ui.PiecesUI;
 import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class UIManager {
     private JFrame window;
