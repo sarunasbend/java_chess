@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 
 import com.sarunasbend.github.logic.Chessboard;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class ChessboardUI extends JPanel {
     private Chessboard chessboard;
@@ -37,8 +36,8 @@ public class ChessboardUI extends JPanel {
 
     public void init(){
         setSize(Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_HEIGHT);
+        setBounds(0,0,Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_WIDTH);
         setBackground(Constants.PRIMARY_COLOR);
-        initListeners();
     }
 
     @Override
