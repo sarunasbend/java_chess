@@ -1,6 +1,6 @@
 package com.sarunasbend.github.logic.pieces.piece;
 
-import com.sarunasbend.github.logic.Chessboard;
+import com.sarunasbend.github.logic.chessboard.Chessboard;
 
 public abstract class Piece {
     private final String id; //starting position on board "A1" would be Rook

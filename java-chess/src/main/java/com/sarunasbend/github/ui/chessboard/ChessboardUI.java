@@ -1,4 +1,4 @@
-package com.sarunasbend.github.ui;
+package com.sarunasbend.github.ui.chessboard;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -12,7 +12,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
-import com.sarunasbend.github.logic.Chessboard;
+import com.sarunasbend.github.logic.chessboard.Chessboard;
 import com.sarunasbend.github.utility.Constants;
 
 public class ChessboardUI extends JPanel {

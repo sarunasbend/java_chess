@@ -1,6 +1,6 @@
 package com.sarunasbend.github.logic.pieces.piece;
 
-import com.sarunasbend.github.logic.Chessboard;
+import com.sarunasbend.github.logic.chessboard.Chessboard;
 
 public class Pawn extends Piece{
     public Pawn(String id, int colour){

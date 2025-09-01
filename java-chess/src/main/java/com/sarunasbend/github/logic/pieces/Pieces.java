@@ -64,6 +64,14 @@ public class Pieces {
         this.pieces.add(new Queen("D8", Constants.BLACK_PIECE));
         this.pieces.add(new King("E8", Constants.BLACK_PIECE));
     }
+
+    public void removePiece(String currentPos){
+        for (Piece piece : this.pieces){
+            if (piece.getPos() == currentPos){
+                this.pieces.remove(piece);
+            }
+        }
+    }
     
     public ArrayList<Piece> getPices(){return this.pieces;}
 }

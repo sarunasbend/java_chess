@@ -20,4 +20,19 @@ public class Constants {
 
     public static final int WHITE_PIECE = 0;
     public static final int BLACK_PIECE = 1;
+
+    public static final String WHITE_PAWN = "W_P";
+    public static final String WHITE_BISHOP = "W_B";
+    public static final String WHITE_KNIGHT = "W_Kn";
+    public static final String WHITE_QUEEN = "W_Q";
+    public static final String WHITE_ROOK = "W_R";
+    public static final String WHITE_KING = "W_K";
+
+    public static final String BLACK_PAWN = "B_P";
+    public static final String BLACK_BISHOP = "B_B";
+    public static final String BLACK_KNIGHT = "B_Kn";
+    public static final String BLACK_QUEEN = "B_Q";
+    public static final String BLACK_ROOK = "B_R";
+    public static final String BLACK_KING = "B_K";
+
 }

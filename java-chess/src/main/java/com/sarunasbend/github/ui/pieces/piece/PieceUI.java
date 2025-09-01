@@ -1,4 +1,4 @@
-package com.sarunasbend.github.ui.pieces;
+package com.sarunasbend.github.ui.pieces.piece;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

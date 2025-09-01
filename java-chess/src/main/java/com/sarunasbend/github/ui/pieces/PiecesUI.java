@@ -1,4 +1,4 @@
-package com.sarunasbend.github.ui;
+package com.sarunasbend.github.ui.pieces;
 
 import java.util.ArrayList;
 
@@ -10,14 +10,13 @@ import com.sarunasbend.github.logic.pieces.piece.Pawn;
 import com.sarunasbend.github.logic.pieces.piece.Piece;
 import com.sarunasbend.github.logic.pieces.piece.Queen;
 import com.sarunasbend.github.logic.pieces.piece.Rook;
-import com.sarunasbend.github.ui.pieces.BishopUI;
-import com.sarunasbend.github.ui.pieces.KingUI;
-import com.sarunasbend.github.ui.pieces.KnightUI;
-import com.sarunasbend.github.ui.pieces.PawnUI;
-import com.sarunasbend.github.ui.pieces.PieceUI;
-import com.sarunasbend.github.ui.pieces.QueenUI;
-import com.sarunasbend.github.ui.pieces.RookUI;
-import com.sarunasbend.github.utility.debug.Debug;
+import com.sarunasbend.github.ui.pieces.piece.BishopUI;
+import com.sarunasbend.github.ui.pieces.piece.KingUI;
+import com.sarunasbend.github.ui.pieces.piece.KnightUI;
+import com.sarunasbend.github.ui.pieces.piece.PawnUI;
+import com.sarunasbend.github.ui.pieces.piece.PieceUI;
+import com.sarunasbend.github.ui.pieces.piece.QueenUI;
+import com.sarunasbend.github.ui.pieces.piece.RookUI;
 
 public class PiecesUI {
     private Pieces whitePieces;

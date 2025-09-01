@@ -1,4 +1,4 @@
-package com.sarunasbend.github.logic;
+package com.sarunasbend.github.logic.chessboard;
 
 import java.awt.image.BufferedImage;
 import java.awt.Font;

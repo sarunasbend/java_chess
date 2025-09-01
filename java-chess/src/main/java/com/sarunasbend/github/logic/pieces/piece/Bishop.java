@@ -1,6 +1,6 @@
 package com.sarunasbend.github.logic.pieces.piece;
 
-import com.sarunasbend.github.logic.Chessboard;
+import com.sarunasbend.github.logic.chessboard.Chessboard;
 
 public class Bishop extends Piece {
     public Bishop(String id, int colour){
