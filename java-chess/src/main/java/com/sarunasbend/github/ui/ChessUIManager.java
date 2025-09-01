@@ -69,5 +69,7 @@ public class ChessUIManager extends JLayeredPane {
 
             piece.setBounds(x, y, blockSize, blockSize);
         }
+
+        revalidate();
     }
 }
