@@ -6,5 +6,6 @@ public class IPCEvents {
         private static final String PREFIX = "chessboard.";
         
         public static final String UPDATE_UI = PREFIX + "updateUI";
+        public static final String PIECE_MOVING = PREFIX + "pieceMoving";
     }
 }

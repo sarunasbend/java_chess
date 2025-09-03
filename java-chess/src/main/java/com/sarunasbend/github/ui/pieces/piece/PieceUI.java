@@ -8,6 +8,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import com.sarunasbend.github.bridge.IPCEvents;
+import com.sarunasbend.github.bridge.IPCLogic;
+import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.pieces.piece.Piece;
 import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
@@ -19,6 +22,9 @@ import java.awt.event.MouseEvent;
 // generic class for pieces
 public class PieceUI<OnePiece extends Piece> extends JLabel {
     private final OnePiece onePiece;
+    private int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
+
+    private Boolean isMouseHeldDown = false;
 
     public PieceUI(OnePiece onePiece){
         this.onePiece = onePiece;
@@ -40,6 +46,34 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
             @Override
             public void mouseExited(MouseEvent event){
                 setBorder(new EmptyBorder(1,0,0,0));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent event){
+                if (event.getButton() == MouseEvent.BUTTON1){
+                    isMouseHeldDown = true;
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent event){
+                isMouseHeldDown = false;
+                int x = getX() + event.getX();
+                int y = getY() + event.getY();
+
+                x = (x / blockSize) * blockSize;
+                y = (y / blockSize) * blockSize;
+                
+                setBounds(x, y, blockSize, blockSize);
+            }
+        });
+
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent event){
+                if (isMouseHeldDown){
+
+                }
             }
         });
     }

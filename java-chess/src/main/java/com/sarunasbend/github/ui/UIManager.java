@@ -15,8 +15,6 @@ public class UIManager {
     private JFrame window;
 
     public void init(){
-        JavaChess.chessUiManager.init();
-
         window = new JFrame();        
         window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         window.setVisible(true);
