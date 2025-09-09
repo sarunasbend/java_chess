@@ -45,7 +45,6 @@ public class ChessUIManager extends JLayeredPane {
         });
 
         IPCUI.handle(IPCEvents.UI.UPDATE_UI, (args) ->{
-            Debug.info("HERE?");
             updateChessPieces();
             return null;
         });

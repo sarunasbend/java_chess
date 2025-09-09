@@ -71,7 +71,9 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
                 x = (x / blockSize);
                 y = (y / blockSize);
                 
+                
                 IPCUI.send(IPCEvents.State.PIECE_SELECTED, onePiece, GameState.getPosition(x, y));
+                IPCUI.send(IPCEvents.State.PIECE_DESELECTED);
 
             }
         });

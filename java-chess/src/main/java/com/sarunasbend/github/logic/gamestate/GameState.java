@@ -54,8 +54,6 @@ public class GameState {
         IPCLogic.handle(IPCEvents.State.PIECE_SELECTED, (args) ->{
             currentlySelectedPiece = (Piece) args[0];
             positionToMove = (String) args[1];
-            Debug.info(positionToMove);
-
             currentlySelectedPiece.onMove(chessboard_grid, positionToMove);
 
             return null;
@@ -64,6 +62,7 @@ public class GameState {
         IPCLogic.handle(IPCEvents.State.PIECE_DESELECTED, (args) -> {
             currentlySelectedPiece = null;
             positionToMove = null;
+            
             return null;
         });
     }
