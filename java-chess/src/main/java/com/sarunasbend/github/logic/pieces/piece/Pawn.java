@@ -36,9 +36,9 @@ public class Pawn extends Piece{
         //     }
         //     setPos(posToMove);
         // }
-
+        Debug.info(posToMove);
         setPos(posToMove);
-        
+
         IPCLogic.send(IPCEvents.UI.UPDATE_UI);
     }
 }
