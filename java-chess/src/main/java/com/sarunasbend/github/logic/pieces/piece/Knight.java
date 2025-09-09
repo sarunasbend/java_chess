@@ -14,5 +14,5 @@ public class Knight extends Piece {
     public void onPieceUnselected(){}
 
     @Override
-    public void onMove(Chessboard chessboard){}
+    public void onMove(String[][] chessboard, String posToMove){}
 }

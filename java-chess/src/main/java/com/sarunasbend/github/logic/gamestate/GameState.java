@@ -1,5 +1,8 @@
 package com.sarunasbend.github.logic.gamestate;
 
+import com.sarunasbend.github.logic.movevalidator.*;
+import com.sarunasbend.github.bridge.IPCEvents;
+import com.sarunasbend.github.bridge.IPCLogic;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
 import com.sarunasbend.github.logic.pieces.Pieces;
 import com.sarunasbend.github.logic.pieces.piece.Bishop;
@@ -10,12 +13,20 @@ import com.sarunasbend.github.logic.pieces.piece.Piece;
 import com.sarunasbend.github.logic.pieces.piece.Queen;
 import com.sarunasbend.github.logic.pieces.piece.Rook;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class GameState {
     public static Pieces whitePieces;
     public static Pieces blackPieces;
     public static String[][] chessboard_grid;
     public static Chessboard chessboard;
+
+    public static MoveValidator moveValidator;
+
+    // the piece that is currently selected
+    // and the desired position for the piece to move
+    public static Piece currentlySelectedPiece;
+    public static String positionToMove;
     
     private int playerColour;
 
@@ -28,18 +39,41 @@ public class GameState {
         blackPieces.init();
         chessboard = new Chessboard();
         chessboard.init();
+        moveValidator = new MoveValidator();
+        moveValidator.init();
     }
 
     public void init(){
         setupChessboard();
+        addListeners();
+        printChessboard();
+    }
+
+    private void addListeners(){
+        // to track the currently selected piece
+        IPCLogic.handle(IPCEvents.State.PIECE_SELECTED, (args) ->{
+            currentlySelectedPiece = (Piece) args[0];
+            positionToMove = (String) args[1];
+            Debug.info(positionToMove);
+
+            currentlySelectedPiece.onMove(chessboard_grid, positionToMove);
+
+            return null;
+        });
+
+        IPCLogic.handle(IPCEvents.State.PIECE_DESELECTED, (args) -> {
+            currentlySelectedPiece = null;
+            positionToMove = null;
+            return null;
+        });
     }
 
     private void setupChessboard(){
         for (Piece piece : whitePieces.getPices()){
             // idk why i decided to do it like this, kinda annoying
             String startPos = piece.getId();
-            int row = startPos.charAt(0) - 'A';
-            int column = 8 - Character.getNumericValue(startPos.charAt(1));
+            int row = getRowFromPos(startPos);
+            int column = getColumnFromPos(startPos);
             
             if (piece instanceof Pawn){
                 chessboard_grid[column][row] = Constants.WHITE_PAWN;
@@ -59,8 +93,8 @@ public class GameState {
         // defo could be a seperate function
         for (Piece piece : blackPieces.getPices()){
             String startPos = piece.getId();
-            int row = startPos.charAt(0) - 'A';
-            int column = 8 - Character.getNumericValue(startPos.charAt(1));
+            int row = getRowFromPos(startPos);
+            int column = getColumnFromPos(startPos);
 
             if (piece instanceof Pawn){
                 chessboard_grid[column][row] = Constants.BLACK_PAWN;
@@ -105,5 +139,18 @@ public class GameState {
 
     public void removeFromBlackPieces(String currentPos){
         GameState.blackPieces.removePiece(currentPos);        
+    }
+
+    public static int getRowFromPos(String id){
+        return id.charAt(0) - 'A';
+    }
+
+    public static int getColumnFromPos(String id){
+        return 8 - Character.getNumericValue(id.charAt(1));
+    }
+
+    public static String getPosition(int row, int column){
+        String pos = Character.toString((char) (row + 65));
+        return pos + (Integer.toString(8 - (column + 1) + 1));
     }
 }

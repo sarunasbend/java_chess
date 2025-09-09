@@ -43,13 +43,18 @@ public class ChessUIManager extends JLayeredPane {
         IPCUI.handle(IPCEvents.UI.PIECE_MOVING, (args) -> {
             return null;
         });
+
+        IPCUI.handle(IPCEvents.UI.UPDATE_UI, (args) ->{
+            Debug.info("HERE?");
+            updateChessPieces();
+            return null;
+        });
     }
 
     public void placeStartingChessPieces(){
         int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
-        int count = 0;
+
         for (PieceUI piece : piecesUI.getPiecesUIs()){
-            count++;
             String curPos = piece.getPiece().getPos();
 
             int column = curPos.charAt(0) - 'A';
@@ -63,7 +68,6 @@ public class ChessUIManager extends JLayeredPane {
             piece.setBounds(x, y, blockSize, blockSize);
             add(piece, JLayeredPane.PALETTE_LAYER);
         } 
-        Debug.info(Integer.toString(count));
     }
 
     public void updateChessPieces(){

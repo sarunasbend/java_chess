@@ -22,5 +22,6 @@ public abstract class Piece {
     public abstract void onPieceSelected();
     public abstract void onPieceUnselected();
 
-    public abstract void onMove(Chessboard chessboard);
+    public abstract void onMove(String[][] chessboard, String posToMove);
+
 }
