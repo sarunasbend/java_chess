@@ -6,14 +6,10 @@ import com.sarunasbend.github.bridge.IPCEvents;
 import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.gamestate.GameState;
 import com.sarunasbend.github.ui.chessboard.ChessboardUI;
-import com.sarunasbend.github.ui.pieces.PiecesUI;
-import com.sarunasbend.github.ui.pieces.piece.PieceUI;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class ChessUIManager extends JLayeredPane {
     private ChessboardUI chessboardUI;
-    private PiecesUI piecesUI;
 
     public ChessUIManager(){
 
@@ -29,10 +25,6 @@ public class ChessUIManager extends JLayeredPane {
 
         add(chessboardUI, JLayeredPane.DEFAULT_LAYER);
 
-        piecesUI = new PiecesUI(GameState.whitePieces, GameState.blackPieces);
-        piecesUI.init();
-
-        placeStartingChessPieces();
     }
 
     public void configuration(){
@@ -45,47 +37,7 @@ public class ChessUIManager extends JLayeredPane {
         });
 
         IPCUI.handle(IPCEvents.UI.UPDATE_UI, (args) ->{
-            updateChessPieces();
             return null;
         });
-    }
-
-    public void placeStartingChessPieces(){
-        int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
-
-        for (PieceUI piece : piecesUI.getPiecesUIs()){
-            String curPos = piece.getPiece().getPos();
-
-            int column = curPos.charAt(0) - 'A';
-            int row = Character.getNumericValue(curPos.charAt(1)) - 1; 
-
-            int flippedRow = (Constants.CHESSBOARD_ROWS - 1) - row;
-
-            int x = column * blockSize;
-            int y = flippedRow * blockSize;
-
-            piece.setBounds(x, y, blockSize, blockSize);
-            add(piece, JLayeredPane.PALETTE_LAYER);
-        } 
-    }
-
-    public void updateChessPieces(){
-        int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
-
-        for (PieceUI piece : piecesUI.getPiecesUIs()){
-            String curPos = piece.getPiece().getPos();
-
-            int column = curPos.charAt(0) - 'A';
-            int row = Character.getNumericValue(curPos.charAt(1)) - 1; 
-
-            int flippedRow = (Constants.CHESSBOARD_ROWS - 1) - row;
-
-            int x = column * blockSize;
-            int y = flippedRow * blockSize;
-
-            piece.setBounds(x, y, blockSize, blockSize);
-        }
-
-        revalidate();
     }
 }

@@ -1,4 +1,4 @@
-package com.sarunasbend.github.ui.pieces.piece;
+package com.sarunasbend.github.ui.pieces;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,7 +12,7 @@ import com.sarunasbend.github.bridge.IPCEvents;
 import com.sarunasbend.github.bridge.IPCLogic;
 import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.gamestate.GameState;
-import com.sarunasbend.github.logic.pieces.piece.Piece;
+import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
 
@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 // generic class for pieces
 public class PieceUI<OnePiece extends Piece> extends JLabel {
     private final OnePiece onePiece;
-    private int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
+    private int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
 
     private int prevX = -1;
     private int prevY = - 1;
@@ -70,10 +70,6 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
 
                 x = (x / blockSize);
                 y = (y / blockSize);
-                
-                
-                IPCUI.send(IPCEvents.State.PIECE_SELECTED, onePiece, GameState.getPosition(x, y));
-                IPCUI.send(IPCEvents.State.PIECE_DESELECTED);
 
             }
         });

@@ -9,8 +9,8 @@ public class Constants {
     public static final int CHESSBOARD_HEIGHT = 800;
     public static final int CHESSBOARD_WIDTH = 800;
 
-    public static final int CHESSBOARD_ROWS = 8;
-    public static final int CHESSBOARD_COLUMNS = 8;
+    public static final int CHESSBOARD_RANKS = 8;
+    public static final int CHESSBOARD_FILES = 8;
 
     public static final Color WHITE_COLOUR = new Color(180, 175, 165);
     public static final Color BLACK_COLOR = new Color(145, 140, 125);
