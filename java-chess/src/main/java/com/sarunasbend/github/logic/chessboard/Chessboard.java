@@ -13,8 +13,12 @@ public class Chessboard {
 
     private Font font;
 
-    public void init(){
-        drawWhiteChessboard();
+    public void init(int colour){
+        if (colour == Constants.WHITE_PIECE){
+            drawWhiteChessboard();
+        } else if (colour == Constants.BLACK_PIECE){
+            drawBlackChessboard();
+        }
     }
 
     private void drawWhiteChessboard(){
