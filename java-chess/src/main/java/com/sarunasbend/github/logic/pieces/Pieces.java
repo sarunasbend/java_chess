@@ -74,4 +74,24 @@ public class Pieces {
     }
     
     public ArrayList<Piece> getPices(){return this.pieces;}
+
+    // get piece by id
+    public Piece getPieceById(String id){
+        for (Piece piece : pieces){
+            if (piece.getId() == id){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    // get piece by position on the board
+    public Piece getPieceByPos(String pos){
+        for (Piece piece : pieces) {
+            if (piece.getPos() == pos){
+                return piece;
+            }
+        }
+        return null;
+    }
 }

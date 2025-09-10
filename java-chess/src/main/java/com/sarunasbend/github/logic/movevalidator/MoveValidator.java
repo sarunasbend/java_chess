@@ -15,7 +15,6 @@ public class MoveValidator {
     private void addValidators(){
         IPCLogic.handle(IPCEvents.Validator.CHECK_VALID, (args) -> {
             
-            
             return null;
         });
     }

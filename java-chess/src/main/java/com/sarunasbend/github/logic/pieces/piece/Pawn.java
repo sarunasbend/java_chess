@@ -20,7 +20,7 @@ public class Pawn extends Piece{
     public void onPieceUnselected(){
         Debug.info(getId() + " Deselected");
     }
-
+    
     @Override
     public void onMove(String[][] chessboard, String posToMove){
         int row = GameState.getRowFromPos(posToMove);
