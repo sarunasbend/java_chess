@@ -28,6 +28,7 @@ import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.ui.pieces.QueenUI;
 import com.sarunasbend.github.ui.pieces.RookUI;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class ChessUIManager extends JLayeredPane {
     private ChessboardUI chessboardUI;
@@ -58,61 +59,38 @@ public class ChessUIManager extends JLayeredPane {
     }
 
     private void addEventListeners(){
-        IPCUI.handle(IPCEvents.Chessboard.SHOW_AVAILABLE_MOVES, (args) -> {
-            showAvailableMoves((ArrayList<int[]>) args[0]);
-            return null;
-        });
-
-        IPCUI.handle(IPCEvents.Chessboard.CLEAR_AVAILABLE_MOVES, (args) -> {
-            clearAvailableMoves();
-            return null;
-        });
+        
 
     }
 
     private void placeStartingPieces(){
         int blocksize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
 
-        for (int row = 0; row < Constants.CHESSBOARD_RANKS; row++){
-            for (int column = 0; column < Constants.CHESSBOARD_FILES; column++){
-                Piece piece = GameState.game[row][column];
+        for (int file = 0; file < Constants.CHESSBOARD_RANKS; file++){
+            for (int rank = 0; rank < Constants.CHESSBOARD_FILES; rank++){
+                Piece piece = GameState.game[rank][file];
                 
                 if (piece != null){
                     if (piece instanceof Pawn){
-                        game[row][column] = new PawnUI((Pawn) piece);
+                        game[rank][file] = new PawnUI((Pawn) piece);
                     } else if (piece instanceof Knight){
-                        game[row][column] = new KnightUI((Knight) piece);
+                        game[rank][file] = new KnightUI((Knight) piece);
                     } else if (piece instanceof Rook){
-                        game[row][column] = new RookUI((Rook) piece);
+                        game[rank][file] = new RookUI((Rook) piece);
                     } else if (piece instanceof Bishop){
-                        game[row][column] = new BishopUI((Bishop) piece);
+                        game[rank][file] = new BishopUI((Bishop) piece);
                     } else if (piece instanceof Queen){
-                        game[row][column] = new QueenUI((Queen) piece);
+                        game[rank][file] = new QueenUI((Queen) piece);
                     } else if (piece instanceof King){
-                        game[row][column] = new KingUI((King) piece);
+                        game[rank][file] = new KingUI((King) piece);
                     } else {
                     }
-                    game[row][column].setBounds(row * blocksize, column * blocksize, blocksize, blocksize);
-                    add(game[row][column], JLayeredPane.PALETTE_LAYER);
+                    game[rank][file].setBounds(file * blocksize, rank * blocksize, blocksize, blocksize);
+                    add(game[rank][file], JLayeredPane.PALETTE_LAYER);
                 } else {
-                    game[row][column] = null;
+                    game[rank][file] = null;
                 }
             }
-        }
-    }
-
-    private void showAvailableMoves(ArrayList<int[]> availableMoves){
-        availableMovesLabels = new JLabel[availableMoves.size()];
-        
-        int blocksize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
-
-        for (int index = 0; index < availableMoves.size(); index++){
-            int rank = availableMoves.get(index)[0];
-            int file = availableMoves.get(index)[1];
-            
-            availableMovesLabels[index] = new JLabel("X");
-            availableMovesLabels[index].setBounds(file * blocksize, rank * blocksize, blocksize, blocksize);
-            add(availableMovesLabels[index], JLayeredPane.PALETTE_LAYER);
         }
     }
 

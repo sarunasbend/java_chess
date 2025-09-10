@@ -16,7 +16,7 @@ public class Pawn extends Piece{
     
     @Override
     public void onPieceSelected(){
-        ArrayList<int[]> availableMoves = MoveValidator.getPawnMoves(getRank(), getFile());
+        ArrayList<int[]> availableMoves = MoveValidator.getPawnMoves(getRank(), getFile(), getColour());
         IPCLogic.send(IPCEvents.Chessboard.SHOW_AVAILABLE_MOVES, availableMoves);
     }
     

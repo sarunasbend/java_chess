@@ -23,8 +23,8 @@ public class GameState {
     
     public static MoveValidator moveValidator;
 
-    private int playerColour;
-    private int oppositeColour;
+    public static int playerColour;
+    public static int oppositeColour;
 
     public GameState(int playerColour){
         this.playerColour = playerColour;
@@ -54,29 +54,29 @@ public class GameState {
     // adds the pieces to the chessboard
     private void setUpChessBoard(){
         for (int file = 0; file < Constants.CHESSBOARD_FILES; file++){
-            game[file][6] = new Pawn(playerColour, 6, file);
-            game[file][1] = new Pawn(oppositeColour, 1, file);
+            game[6][file] = new Pawn(playerColour, 6, file);
+            game[1][file] = new Pawn(oppositeColour, 1, file);
         }
 
         // manually adding the pieces for the time being 
-        game[0][7] = new Rook(playerColour, 0, 7);
+        game[7][0] = new Rook(playerColour, 7, 0);
         game[7][7] = new Rook(playerColour, 7, 7);
-        game[1][7] = new Knight(playerColour, 1, 7);
-        game[6][7] = new Knight(playerColour, 6, 7);
-        game[2][7] = new Bishop(playerColour, 2, 7);
-        game[5][7] = new Bishop(playerColour, 5, 7);
-        game[3][7] = new Queen(playerColour, 3, 7);
-        game[4][7] = new King(playerColour, 4, 7);
+        game[7][1] = new Knight(playerColour, 7, 1);
+        game[7][6] = new Knight(playerColour, 7, 6);
+        game[7][2] = new Bishop(playerColour, 7, 2);
+        game[7][5] = new Bishop(playerColour, 7, 5);
+        game[7][3] = new Queen(playerColour, 7, 3);
+        game[7][4] = new King(playerColour, 7, 4);
 
-        // opponents pieces'
+        // opponents pieces
         game[0][0] = new Rook(oppositeColour, 0, 0);
-        game[7][0] = new Rook(oppositeColour, 7, 0);
-        game[1][0] = new Knight(oppositeColour, 1, 0);
-        game[6][0] = new Knight(oppositeColour, 6, 0);
-        game[2][0] = new Bishop(oppositeColour, 2, 0);
-        game[5][0] = new Bishop(oppositeColour, 5, 0);
-        game[3][0] = new Queen(oppositeColour, 3, 0);
-        game[4][0] = new King(oppositeColour, 4, 0);
+        game[0][7] = new Rook(oppositeColour, 0, 7);
+        game[0][1] = new Knight(oppositeColour, 0, 1);
+        game[0][6] = new Knight(oppositeColour, 0, 6);
+        game[0][2] = new Bishop(oppositeColour, 0, 2);
+        game[0][5] = new Bishop(oppositeColour, 0, 5);
+        game[0][3] = new Queen(oppositeColour, 0, 3);
+        game[0][4] = new King(oppositeColour, 0, 4);
 
     }
 }
