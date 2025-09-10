@@ -1,5 +1,12 @@
 package com.sarunasbend.github.ui;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import com.sarunasbend.github.bridge.IPCEvents;
@@ -25,6 +32,8 @@ import com.sarunasbend.github.utility.Constants;
 public class ChessUIManager extends JLayeredPane {
     private ChessboardUI chessboardUI;
 
+    private JLabel[] availableMovesLabels;
+
     private PieceUI game[][] = new PieceUI[Constants.CHESSBOARD_RANKS][Constants.CHESSBOARD_FILES];
 
     public ChessUIManager(){
@@ -49,13 +58,16 @@ public class ChessUIManager extends JLayeredPane {
     }
 
     private void addEventListeners(){
-        IPCUI.handle(IPCEvents.UI.PIECE_MOVING, (args) -> {
+        IPCUI.handle(IPCEvents.Chessboard.SHOW_AVAILABLE_MOVES, (args) -> {
+            showAvailableMoves((ArrayList<int[]>) args[0]);
             return null;
         });
 
-        IPCUI.handle(IPCEvents.UI.UPDATE_UI, (args) ->{
+        IPCUI.handle(IPCEvents.Chessboard.CLEAR_AVAILABLE_MOVES, (args) -> {
+            clearAvailableMoves();
             return null;
         });
+
     }
 
     private void placeStartingPieces(){
@@ -86,6 +98,28 @@ public class ChessUIManager extends JLayeredPane {
                     game[row][column] = null;
                 }
             }
+        }
+    }
+
+    private void showAvailableMoves(ArrayList<int[]> availableMoves){
+        availableMovesLabels = new JLabel[availableMoves.size()];
+        
+        int blocksize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
+
+        for (int index = 0; index < availableMoves.size(); index++){
+            int rank = availableMoves.get(index)[0];
+            int file = availableMoves.get(index)[1];
+            
+            availableMovesLabels[index] = new JLabel("X");
+            availableMovesLabels[index].setBounds(file * blocksize, rank * blocksize, blocksize, blocksize);
+            add(availableMovesLabels[index], JLayeredPane.PALETTE_LAYER);
+        }
+    }
+
+    private void clearAvailableMoves(){
+        for (int index = 0; index <  availableMovesLabels.length; index++){
+            remove(availableMovesLabels[index]);
+            availableMovesLabels[index] = null;
         }
     }
 }

@@ -1,24 +1,12 @@
 package com.sarunasbend.github.bridge;
 
 public class IPCEvents {
-    // just an example of possible events
-    public static class UI {
+    // user zooms in/out or moves it around on chessboard
+    public static class Chessboard {
         private static final String PREFIX = "chessboard.";
-        
-        public static final String UPDATE_UI = PREFIX + "updateUI";
-        public static final String PIECE_MOVING = PREFIX + "pieceMoving";
-    }
 
-    public static class Validator {
-        private static final String PREFIX = "moveValidator.";
-
-        public static final String CHECK_VALID = PREFIX + "checkValid";
-    }
-
-    public static class State {
-        private static final String PREFIX = "gameState.";
-
-        public static final String PIECE_SELECTED = PREFIX + "pieceSelected";
-        public static final String PIECE_DESELECTED = PREFIX + "pieceDeselected";
+        public static final String CHESSBOARD_MOVED = PREFIX + "chessboardMoved";
+        public static final String SHOW_AVAILABLE_MOVES = PREFIX + "showAvailableMoves";
+        public static final String CLEAR_AVAILABLE_MOVES = PREFIX + "clearAvailableMoves";
     }
 }

@@ -45,11 +45,13 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
             @Override
             public void mouseEntered(MouseEvent event){
                 setBorder(createBorder());
+                onePiece.onPieceSelected();
             }
 
             @Override
             public void mouseExited(MouseEvent event){
                 setBorder(new EmptyBorder(1,0,0,0));
+                onePiece.onPieceUnselected();
             }
 
             @Override

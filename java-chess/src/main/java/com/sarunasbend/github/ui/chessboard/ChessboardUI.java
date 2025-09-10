@@ -10,7 +10,10 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
+import com.sarunasbend.github.bridge.IPCEvents;
+import com.sarunasbend.github.bridge.IPCLogic;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
+import com.sarunasbend.github.ui.ChessUIManager;
 import com.sarunasbend.github.utility.Constants;
 
 public class ChessboardUI extends JPanel {
@@ -107,6 +110,7 @@ public class ChessboardUI extends JPanel {
                 offsetY = mouseY - (mouseY - offsetY) * (zoom / oldZoom);
                 
                 repaint();
+
             }
         });
     }
