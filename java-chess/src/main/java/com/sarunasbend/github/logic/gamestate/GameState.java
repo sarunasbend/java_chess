@@ -3,6 +3,7 @@ package com.sarunasbend.github.logic.gamestate;
 import com.sarunasbend.github.logic.movevalidator.*;
 import com.sarunasbend.github.bridge.IPCEvents;
 import com.sarunasbend.github.bridge.IPCLogic;
+import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
 import com.sarunasbend.github.logic.pieces.Bishop;
 import com.sarunasbend.github.logic.pieces.King;
@@ -48,7 +49,10 @@ public class GameState {
     }
 
     private void addListeners(){
-
+        IPCUI.handle(IPCEvents.Chessboard.PIECE_MOVED, (args) -> {
+            pieceMoved((int) args[0], (int) args[1], (int) args[2], (int) args[3]);
+            return null;
+        });
     }
 
     // adds the pieces to the chessboard
@@ -78,5 +82,11 @@ public class GameState {
         game[0][3] = new Queen(oppositeColour, 0, 3);
         game[0][4] = new King(oppositeColour, 0, 4);
 
+    }
+
+    private void pieceMoved(int prevRank, int prevFile, int newRank, int newFile){
+        game[newRank][newFile] = game[prevRank][prevFile];
+        game[prevRank][prevFile] = null;
+        IPCLogic.send(IPCEvents.Chessboard.UPDATE_UI);
     }
 }

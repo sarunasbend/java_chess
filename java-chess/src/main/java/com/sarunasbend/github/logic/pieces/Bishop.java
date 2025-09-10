@@ -18,7 +18,7 @@ public class Bishop extends Piece {
     public void onPieceUnselected(){}
 
     @Override
-    public void onMove(){
+    public void onMove(int rank, int file){
 
     }
 }

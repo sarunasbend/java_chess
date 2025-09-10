@@ -5,8 +5,11 @@ public class IPCEvents {
     public static class Chessboard {
         private static final String PREFIX = "chessboard.";
 
-        public static final String CHESSBOARD_MOVED = PREFIX + "chessboardMoved";
         public static final String SHOW_AVAILABLE_MOVES = PREFIX + "showAvailableMoves";
         public static final String CLEAR_AVAILABLE_MOVES = PREFIX + "clearAvailableMoves";
+
+        public static final String PIECE_MOVED = PREFIX + "pieceMoved";
+
+        public static final String UPDATE_UI = PREFIX + "updateUI";
     }
 }

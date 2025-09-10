@@ -73,6 +73,7 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
                 x = (x / blockSize);
                 y = (y / blockSize);
 
+                onePiece.onMove(x, y);
             }
         });
 
@@ -85,8 +86,6 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
 
                     x = (x / blockSize) * blockSize;
                     y = (y / blockSize) * blockSize;
-                    
-                    setBounds(x, y, blockSize, blockSize);
                 }
             }
         });

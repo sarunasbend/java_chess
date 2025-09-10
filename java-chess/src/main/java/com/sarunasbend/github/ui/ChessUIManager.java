@@ -59,7 +59,10 @@ public class ChessUIManager extends JLayeredPane {
     }
 
     private void addEventListeners(){
-        
+        IPCUI.handle(IPCEvents.Chessboard.UPDATE_UI, (args) -> {
+            placeStartingPieces();
+            return null;
+        });
 
     }
 
@@ -91,13 +94,6 @@ public class ChessUIManager extends JLayeredPane {
                     game[rank][file] = null;
                 }
             }
-        }
-    }
-
-    private void clearAvailableMoves(){
-        for (int index = 0; index <  availableMovesLabels.length; index++){
-            remove(availableMovesLabels[index]);
-            availableMovesLabels[index] = null;
         }
     }
 }

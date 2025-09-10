@@ -18,6 +18,6 @@ public class Rook extends Piece{
     public void onPieceUnselected(){}
 
     @Override
-    public void onMove(){
+    public void onMove(int rank, int field){
     }
 }

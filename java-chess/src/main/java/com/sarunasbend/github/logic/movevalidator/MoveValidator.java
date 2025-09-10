@@ -54,7 +54,31 @@ public class MoveValidator {
             }
         }
         
+        return availableMoves;
+    }
 
+    public static ArrayList<int[]> getKnightMoves(int rank, int file, int colour){
+        ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        return availableMoves;
+    }
+
+    public static ArrayList<int[]> getBishopMoves(int rank, int file, int colour){
+        ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        return availableMoves;
+    }
+
+    public static ArrayList<int[]> getRookMoves(int rank, int file, int colour){
+        ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        return availableMoves;
+    }
+
+    public static ArrayList<int[]> getQueenMoves(int rank, int file, int colour){
+        ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        return availableMoves;
+    }
+
+    public static ArrayList<int[]> getKingMoves(int rank, int file, int colour){
+        ArrayList<int[]> availableMoves = new ArrayList<int[]>();
         return availableMoves;
     }
 }

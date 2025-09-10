@@ -16,10 +16,13 @@ public abstract class Piece {
     public abstract void onPieceSelected();
     public abstract void onPieceUnselected();
 
-    public abstract void onMove();
+    public abstract void onMove(int rank, int file);
 
     public int getRank(){return this.rank;}
     public int getFile(){return this.file;}
     public int getColour(){return this.colour;}
+
+    public void setRank(int rank){this.rank = rank;}
+    public void setFile(int file){this.file = file;}
 
 }

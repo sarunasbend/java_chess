@@ -26,6 +26,18 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public void onMove(){
+    public void onMove(int rank, int file){
+        ArrayList<int[]> availableMoves = MoveValidator.getPawnMoves(getRank(), getFile(), getColour());
+
+        int[] moveToMake = new int[]{rank, file};
+
+        for (int[] move : availableMoves){
+            if (move == moveToMake){
+                IPCLogic.send(IPCEvents.Chessboard.PIECE_MOVED, moveToMake[0], moveToMake[1], getRank(), getFile());
+                setRank(moveToMake[0]);
+                setFile(moveToMake[1]);
+                return;
+            }
+        }
     }
 }
