@@ -32,10 +32,12 @@ public class Pawn extends Piece{
         int[] moveToMake = new int[]{rank, file};
 
         for (int[] move : availableMoves){
-            if (move == moveToMake){
-                IPCLogic.send(IPCEvents.Chessboard.PIECE_MOVED, moveToMake[0], moveToMake[1], getRank(), getFile());
+            if (move[0] == moveToMake[0] && move[1] == moveToMake[1]){
+                IPCLogic.send(IPCEvents.Chessboard.PIECE_MOVED, getRank(), getFile(), moveToMake[0], moveToMake[1]);
+                IPCLogic.send(IPCEvents.Chessboard.UPDATE_UI, getRank(), getFile(), moveToMake[0], moveToMake[1]);
                 setRank(moveToMake[0]);
                 setFile(moveToMake[1]);
+                
                 return;
             }
         }

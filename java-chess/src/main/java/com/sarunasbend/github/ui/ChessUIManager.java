@@ -33,8 +33,6 @@ import com.sarunasbend.github.utility.debug.Debug;
 public class ChessUIManager extends JLayeredPane {
     private ChessboardUI chessboardUI;
 
-    private JLabel[] availableMovesLabels;
-
     private PieceUI game[][] = new PieceUI[Constants.CHESSBOARD_RANKS][Constants.CHESSBOARD_FILES];
 
     public ChessUIManager(){
@@ -60,17 +58,21 @@ public class ChessUIManager extends JLayeredPane {
 
     private void addEventListeners(){
         IPCUI.handle(IPCEvents.Chessboard.UPDATE_UI, (args) -> {
-            placeStartingPieces();
+            int prevRank = (int) args[0];
+            int prevFile = (int) args[1];
+            int newRank = (int) args[2];
+            int newFile = (int) args[3];
+            
+            updatePieces(prevRank, prevFile, newRank, newFile);;
             return null;
         });
-
     }
 
     private void placeStartingPieces(){
         int blocksize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
 
-        for (int file = 0; file < Constants.CHESSBOARD_RANKS; file++){
-            for (int rank = 0; rank < Constants.CHESSBOARD_FILES; rank++){
+        for (int file = 0; file < Constants.CHESSBOARD_FILES; file++){
+            for (int rank = 0; rank < Constants.CHESSBOARD_RANKS; rank++){
                 Piece piece = GameState.game[rank][file];
                 
                 if (piece != null){
@@ -94,6 +96,49 @@ public class ChessUIManager extends JLayeredPane {
                     game[rank][file] = null;
                 }
             }
+        }
+    }
+
+    private void updatePieces(int prevRank, int prevFile, int newRank, int newFile){
+
+        int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
+
+        game[newRank][newFile] = game[prevRank][prevFile];
+        game[prevRank][prevFile] = null;
+
+        for (int file = 0; file < Constants.CHESSBOARD_FILES; file++){
+            for (int rank = 0; rank < Constants.CHESSBOARD_RANKS; rank++){
+                if (game[rank][file] != null){
+                    game[rank][file].setBounds(file * blockSize, rank * blockSize, blockSize, blockSize);
+                }
+            }
+        }
+    }
+
+    // Debug Function
+    public void printBoard() {
+        for (int rank = 0; rank < game.length; rank++) {
+            for (int file = 0; file < game[rank].length; file++) {
+                PieceUI piece = game[rank][file];
+                if (piece == null) {
+                    System.out.print(". ");
+                } else if (piece instanceof PawnUI) {
+                    System.out.print("P ");
+                } else if (piece instanceof KnightUI) {
+                    System.out.print("N ");
+                } else if (piece instanceof RookUI) {
+                    System.out.print("R ");
+                } else if (piece instanceof BishopUI) {
+                    System.out.print("B ");
+                } else if (piece instanceof QueenUI) {
+                    System.out.print("Q ");
+                } else if (piece instanceof KingUI) {
+                    System.out.print("K ");
+                } else {
+                    System.out.print("? ");
+                }
+            }
+            System.out.println();
         }
     }
 }

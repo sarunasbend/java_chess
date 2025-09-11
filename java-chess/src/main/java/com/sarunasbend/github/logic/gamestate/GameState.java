@@ -12,6 +12,13 @@ import com.sarunasbend.github.logic.pieces.Pawn;
 import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.logic.pieces.Queen;
 import com.sarunasbend.github.logic.pieces.Rook;
+import com.sarunasbend.github.ui.pieces.BishopUI;
+import com.sarunasbend.github.ui.pieces.KingUI;
+import com.sarunasbend.github.ui.pieces.KnightUI;
+import com.sarunasbend.github.ui.pieces.PawnUI;
+import com.sarunasbend.github.ui.pieces.PieceUI;
+import com.sarunasbend.github.ui.pieces.QueenUI;
+import com.sarunasbend.github.ui.pieces.RookUI;
 import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
 
@@ -87,6 +94,39 @@ public class GameState {
     private void pieceMoved(int prevRank, int prevFile, int newRank, int newFile){
         game[newRank][newFile] = game[prevRank][prevFile];
         game[prevRank][prevFile] = null;
-        IPCLogic.send(IPCEvents.Chessboard.UPDATE_UI);
+    }
+
+    // Debug function
+    public void printBoard() {
+        for (int rank = 0; rank < game.length; rank++) {
+            System.out.print(rank);
+            for (int file = 0; file < game[rank].length; file++) {
+                Piece piece = game[rank][file];
+                if (piece == null) {
+                    System.out.print(". ");
+                } else if (piece instanceof Pawn) {
+                    System.out.print("P ");
+                } else if (piece instanceof Knight) {
+                    System.out.print("N ");
+                } else if (piece instanceof Rook) {
+                    System.out.print("R ");
+                } else if (piece instanceof Bishop) {
+                    System.out.print("B ");
+                } else if (piece instanceof Queen) {
+                    System.out.print("Q ");
+                } else if (piece instanceof King) {
+                    System.out.print("K ");
+                } else {
+                    System.out.print("? ");
+                }
+            }
+            System.out.println();
+        }
+
+        System.out.print("  ");
+        for (int file = 7; file >= 0 ; file--) {
+            System.out.print(file + " ");
+        }
+        System.out.println();
     }
 }
