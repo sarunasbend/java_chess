@@ -15,6 +15,13 @@ public class MoveValidator {
     public void init(){
     }
 
+    public static boolean rankWithinBounds(int rank){
+        return (rank >= 0) && (rank < Constants.CHESSBOARD_RANKS);
+    }
+
+    public static boolean fileWithinBounds(int file){
+        return (file >= 0) && (file < Constants.CHESSBOARD_FILES);
+    }
 
     // given a rank, file and the chessboard, finds all available pieces
     public static ArrayList<int[]> getPawnMoves(int rank, int file, int colour){
@@ -59,6 +66,44 @@ public class MoveValidator {
 
     public static ArrayList<int[]> getKnightMoves(int rank, int file, int colour){
         ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        
+        if (colour == GameState.playerColour){
+            // 1.
+            if (rankWithinBounds(rank - 2) && fileWithinBounds(file - 1)){
+                availableMoves.add(new int[]{rank - 2, file - 1});
+            }
+            // 2.
+            if (rankWithinBounds(rank - 2) && fileWithinBounds(file + 1)){
+                availableMoves.add(new int[]{rank - 2, file + 1});
+            }
+            // 3.
+            if (rankWithinBounds(rank - 1) && fileWithinBounds(file + 2)){
+                availableMoves.add(new int[]{rank - 1, file + 2});
+            }
+            // 4.
+            if (rankWithinBounds(rank + 1) && fileWithinBounds(file + 2)){
+                availableMoves.add(new int[]{rank + 1, file + 2});
+            }
+            // 5.
+            if (rankWithinBounds(rank + 2) && fileWithinBounds(file + 1)){
+                availableMoves.add(new int[]{rank + 2, file + 1});
+            }
+            // 6.
+            if (rankWithinBounds(rank + 2) && fileWithinBounds(file - 1)){
+                availableMoves.add(new int[]{rank + 2, file - 1});
+            }
+            // 7.
+            if (rankWithinBounds(rank + 1) && fileWithinBounds(file - 2)){
+                availableMoves.add(new int[]{rank + 1, file - 2});
+            }
+            // 8.
+            if (rankWithinBounds(rank - 1) && fileWithinBounds(file -2)){
+                availableMoves.add(new int[]{rank - 1, file - 2});
+            }
+
+        } else if (colour == GameState.oppositeColour){
+
+        }
         return availableMoves;
     }
 
