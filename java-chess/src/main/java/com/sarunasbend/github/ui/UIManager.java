@@ -5,10 +5,8 @@ import javax.swing.JLayeredPane;
 
 import com.sarunasbend.github.JavaChess;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
-import com.sarunasbend.github.logic.pieces.Pieces;
 import com.sarunasbend.github.ui.chessboard.ChessboardUI;
-import com.sarunasbend.github.ui.pieces.PiecesUI;
-import com.sarunasbend.github.ui.pieces.piece.PieceUI;
+import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.utility.Constants;
 
 public class UIManager {

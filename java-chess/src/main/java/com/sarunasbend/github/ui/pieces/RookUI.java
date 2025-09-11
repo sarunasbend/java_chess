@@ -1,8 +1,8 @@
-package com.sarunasbend.github.ui.pieces.piece;
+package com.sarunasbend.github.ui.pieces;
 
 import javax.swing.ImageIcon;
 
-import com.sarunasbend.github.logic.pieces.piece.Rook;
+import com.sarunasbend.github.logic.pieces.Rook;
 import com.sarunasbend.github.utility.Constants;
 
 public class RookUI extends PieceUI {

@@ -1,4 +1,4 @@
-package com.sarunasbend.github.ui.pieces.piece;
+package com.sarunasbend.github.ui.pieces;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,7 +11,8 @@ import javax.swing.border.EmptyBorder;
 import com.sarunasbend.github.bridge.IPCEvents;
 import com.sarunasbend.github.bridge.IPCLogic;
 import com.sarunasbend.github.bridge.IPCUI;
-import com.sarunasbend.github.logic.pieces.piece.Piece;
+import com.sarunasbend.github.logic.gamestate.GameState;
+import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
 
@@ -22,7 +23,10 @@ import java.awt.event.MouseEvent;
 // generic class for pieces
 public class PieceUI<OnePiece extends Piece> extends JLabel {
     private final OnePiece onePiece;
-    private int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_ROWS;
+    private int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
+
+    private int prevX = -1;
+    private int prevY = - 1;
 
     private Boolean isMouseHeldDown = false;
 
@@ -41,30 +45,36 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
             @Override
             public void mouseEntered(MouseEvent event){
                 setBorder(createBorder());
+                onePiece.onPieceSelected();
             }
 
             @Override
             public void mouseExited(MouseEvent event){
                 setBorder(new EmptyBorder(1,0,0,0));
+                onePiece.onPieceUnselected();
             }
 
             @Override
             public void mousePressed(MouseEvent event){
                 if (event.getButton() == MouseEvent.BUTTON1){
                     isMouseHeldDown = true;
+                    prevX = getX();
+                    prevY = getY();
                 }
             }
 
             @Override
             public void mouseReleased(MouseEvent event){
                 isMouseHeldDown = false;
+
                 int x = getX() + event.getX();
                 int y = getY() + event.getY();
 
-                x = (x / blockSize) * blockSize;
-                y = (y / blockSize) * blockSize;
-                
-                setBounds(x, y, blockSize, blockSize);
+                x = (x / blockSize);
+                y = (y / blockSize);
+
+                onePiece.onMove(y, x);
+
             }
         });
 
@@ -72,6 +82,11 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
             @Override
             public void mouseDragged(MouseEvent event){
                 if (isMouseHeldDown){
+                    int x = getX() + event.getX();
+                    int y = getY() + event.getY();
+
+                    x = (x / blockSize) * blockSize;
+                    y = (y / blockSize) * blockSize;
 
                 }
             }

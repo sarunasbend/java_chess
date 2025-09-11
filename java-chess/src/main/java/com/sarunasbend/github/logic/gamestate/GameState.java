@@ -1,109 +1,132 @@
 package com.sarunasbend.github.logic.gamestate;
 
+import com.sarunasbend.github.logic.movevalidator.*;
+import com.sarunasbend.github.bridge.IPCEvents;
+import com.sarunasbend.github.bridge.IPCLogic;
+import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
-import com.sarunasbend.github.logic.pieces.Pieces;
-import com.sarunasbend.github.logic.pieces.piece.Bishop;
-import com.sarunasbend.github.logic.pieces.piece.King;
-import com.sarunasbend.github.logic.pieces.piece.Knight;
-import com.sarunasbend.github.logic.pieces.piece.Pawn;
-import com.sarunasbend.github.logic.pieces.piece.Piece;
-import com.sarunasbend.github.logic.pieces.piece.Queen;
-import com.sarunasbend.github.logic.pieces.piece.Rook;
+import com.sarunasbend.github.logic.pieces.Bishop;
+import com.sarunasbend.github.logic.pieces.King;
+import com.sarunasbend.github.logic.pieces.Knight;
+import com.sarunasbend.github.logic.pieces.Pawn;
+import com.sarunasbend.github.logic.pieces.Piece;
+import com.sarunasbend.github.logic.pieces.Queen;
+import com.sarunasbend.github.logic.pieces.Rook;
+import com.sarunasbend.github.ui.pieces.BishopUI;
+import com.sarunasbend.github.ui.pieces.KingUI;
+import com.sarunasbend.github.ui.pieces.KnightUI;
+import com.sarunasbend.github.ui.pieces.PawnUI;
+import com.sarunasbend.github.ui.pieces.PieceUI;
+import com.sarunasbend.github.ui.pieces.QueenUI;
+import com.sarunasbend.github.ui.pieces.RookUI;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class GameState {
-    public static Pieces whitePieces;
-    public static Pieces blackPieces;
-    public static String[][] chessboard_grid;
+    // creation of bufferedimage
     public static Chessboard chessboard;
     
-    private int playerColour;
+    // tracks the game 
+    public static Piece[][] game = new Piece[Constants.CHESSBOARD_RANKS][Constants.CHESSBOARD_FILES];
+    
+    public static MoveValidator moveValidator;
+
+    public static int playerColour;
+    public static int oppositeColour;
 
     public GameState(int playerColour){
         this.playerColour = playerColour;
-        chessboard_grid = new String[Constants.CHESSBOARD_ROWS][Constants.CHESSBOARD_COLUMNS];
-        whitePieces = new Pieces(Constants.WHITE_PIECE);
-        whitePieces.init();
-        blackPieces = new Pieces(Constants.BLACK_PIECE);
-        blackPieces.init();
+
+        if (playerColour == Constants.WHITE_PIECE){
+            this.oppositeColour = Constants.BLACK_PIECE;
+        } else if (playerColour == Constants.BLACK_PIECE) {
+            this.oppositeColour = Constants.WHITE_PIECE;
+        }
+
         chessboard = new Chessboard();
-        chessboard.init();
+        chessboard.init(playerColour);
+
+        moveValidator = new MoveValidator();
+        moveValidator.init();
     }
 
     public void init(){
-        setupChessboard();
+        addListeners();
+        setUpChessBoard();
     }
 
-    private void setupChessboard(){
-        for (Piece piece : whitePieces.getPices()){
-            // idk why i decided to do it like this, kinda annoying
-            String startPos = piece.getId();
-            int row = startPos.charAt(0) - 'A';
-            int column = 8 - Character.getNumericValue(startPos.charAt(1));
-            
-            if (piece instanceof Pawn){
-                chessboard_grid[column][row] = Constants.WHITE_PAWN;
-            } else if (piece instanceof Bishop){
-                chessboard_grid[column][row] = Constants.WHITE_BISHOP;
-            } else if (piece instanceof Knight){
-                chessboard_grid[column][row] = Constants.WHITE_KNIGHT;
-            } else if (piece instanceof Rook){
-                chessboard_grid[column][row] = Constants.WHITE_ROOK;
-            } else if (piece instanceof Queen){
-                chessboard_grid[column][row] = Constants.WHITE_QUEEN;
-            } else if (piece instanceof King){
-                chessboard_grid[column][row] = Constants.WHITE_KING;
-            }
-        }
-
-        // defo could be a seperate function
-        for (Piece piece : blackPieces.getPices()){
-            String startPos = piece.getId();
-            int row = startPos.charAt(0) - 'A';
-            int column = 8 - Character.getNumericValue(startPos.charAt(1));
-
-            if (piece instanceof Pawn){
-                chessboard_grid[column][row] = Constants.BLACK_PAWN;
-            } else if (piece instanceof Bishop){
-                chessboard_grid[column][row] = Constants.BLACK_BISHOP;
-            } else if (piece instanceof Knight){
-                chessboard_grid[column][row] = Constants.BLACK_KNIGHT;
-            } else if (piece instanceof Rook){
-                chessboard_grid[column][row] = Constants.BLACK_ROOK;
-            } else if (piece instanceof Queen){
-                chessboard_grid[column][row] = Constants.BLACK_QUEEN;
-            } else if (piece instanceof King){
-                chessboard_grid[column][row] = Constants.BLACK_KING;
-            }
-        }
+    private void addListeners(){
+        IPCUI.handle(IPCEvents.Chessboard.PIECE_MOVED, (args) -> {
+            pieceMoved((int) args[0], (int) args[1], (int) args[2], (int) args[3]);
+            return null;
+        });
     }
 
-    public void printChessboard(){
-        for (int i = 0; i < chessboard_grid.length; i++) {
-            System.out.print((8 - i) + " ");
-            
-            for (int j = 0; j < chessboard_grid[i].length; j++) {
-                System.out.print(chessboard_grid[i][j] + " ");
+    // adds the pieces to the chessboard
+    private void setUpChessBoard(){
+        for (int file = 0; file < Constants.CHESSBOARD_FILES; file++){
+            game[6][file] = new Pawn(playerColour, 6, file);
+            game[1][file] = new Pawn(oppositeColour, 1, file);
+        }
+
+        // manually adding the pieces for the time being 
+        game[7][0] = new Rook(playerColour, 7, 0);
+        game[7][7] = new Rook(playerColour, 7, 7);
+        game[7][1] = new Knight(playerColour, 7, 1);
+        game[7][6] = new Knight(playerColour, 7, 6);
+        game[7][2] = new Bishop(playerColour, 7, 2);
+        game[7][5] = new Bishop(playerColour, 7, 5);
+        game[7][3] = new Queen(playerColour, 7, 3);
+        game[7][4] = new King(playerColour, 7, 4);
+
+        // opponents pieces
+        game[0][0] = new Rook(oppositeColour, 0, 0);
+        game[0][7] = new Rook(oppositeColour, 0, 7);
+        game[0][1] = new Knight(oppositeColour, 0, 1);
+        game[0][6] = new Knight(oppositeColour, 0, 6);
+        game[0][2] = new Bishop(oppositeColour, 0, 2);
+        game[0][5] = new Bishop(oppositeColour, 0, 5);
+        game[0][3] = new Queen(oppositeColour, 0, 3);
+        game[0][4] = new King(oppositeColour, 0, 4);
+
+    }
+
+    private void pieceMoved(int prevRank, int prevFile, int newRank, int newFile){
+        game[newRank][newFile] = game[prevRank][prevFile];
+        game[prevRank][prevFile] = null;
+    }
+
+    // Debug function
+    public void printBoard() {
+        for (int rank = 0; rank < game.length; rank++) {
+            System.out.print(rank);
+            for (int file = 0; file < game[rank].length; file++) {
+                Piece piece = game[rank][file];
+                if (piece == null) {
+                    System.out.print(". ");
+                } else if (piece instanceof Pawn) {
+                    System.out.print("P ");
+                } else if (piece instanceof Knight) {
+                    System.out.print("N ");
+                } else if (piece instanceof Rook) {
+                    System.out.print("R ");
+                } else if (piece instanceof Bishop) {
+                    System.out.print("B ");
+                } else if (piece instanceof Queen) {
+                    System.out.print("Q ");
+                } else if (piece instanceof King) {
+                    System.out.print("K ");
+                } else {
+                    System.out.print("? ");
+                }
             }
             System.out.println();
         }
 
         System.out.print("  ");
-        for (char c = 'A'; c <= 'H'; c++) {
-            System.out.print(c + " ");
+        for (int file = 7; file >= 0 ; file--) {
+            System.out.print(file + " ");
         }
         System.out.println();
-    }
-
-    public void addToChessboard(){
-    
-    }
-
-    public void removeFromWhitePieces(String currentPos){
-        GameState.whitePieces.removePiece(currentPos);        
-    }
-
-    public void removeFromBlackPieces(String currentPos){
-        GameState.blackPieces.removePiece(currentPos);        
     }
 }

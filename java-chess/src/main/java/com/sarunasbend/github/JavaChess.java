@@ -9,7 +9,7 @@ import com.sarunasbend.github.utility.debug.Debug;
 public class JavaChess {
     public static UIManager uiManager = new UIManager();
     public static ChessUIManager chessUiManager = new ChessUIManager();
-    public static GameState gameState = new GameState(Constants.WHITE_PIECE);
+    public static GameState gameState = new GameState(Constants.BLACK_PIECE);
 
     public static void main(String[] args) {
         startUp();

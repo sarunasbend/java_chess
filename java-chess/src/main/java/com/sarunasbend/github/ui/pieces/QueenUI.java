@@ -1,8 +1,8 @@
-package com.sarunasbend.github.ui.pieces.piece;
+package com.sarunasbend.github.ui.pieces;
 
 import javax.swing.ImageIcon;
 
-import com.sarunasbend.github.logic.pieces.piece.Queen;
+import com.sarunasbend.github.logic.pieces.Queen;
 import com.sarunasbend.github.utility.Constants;
 
 public class QueenUI extends PieceUI {
