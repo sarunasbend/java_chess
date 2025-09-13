@@ -2,7 +2,6 @@ package com.sarunasbend.github.logic.movevalidator;
 
 import com.sarunasbend.github.logic.gamestate.GameState;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 import java.util.ArrayList;
 
@@ -109,16 +108,83 @@ public class MoveValidator {
 
     public static ArrayList<int[]> getBishopMoves(int rank, int file, int colour){
         ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+
+        for (int seeRank = rank - 1, seeFile = file - 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank--, seeFile--){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank - 1, seeFile = file + 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank--, seeFile++){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank + 1, seeFile = file + 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank++, seeFile++){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank + 1, seeFile = file - 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank++, seeFile--){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
         return availableMoves;
     }
 
     public static ArrayList<int[]> getRookMoves(int rank, int file, int colour){
         ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+        
+        for (int seeRank = rank + 1; rankWithinBounds(seeRank); seeRank++){
+            availableMoves.add(new int[]{seeRank, file});
+        }
+
+        for (int seeRank = rank - 1; rankWithinBounds(seeRank); seeRank--){
+            availableMoves.add(new int[]{seeRank, file});
+        }
+
+        for (int seeFile = file + 1; fileWithinBounds(seeFile); seeFile++){
+            availableMoves.add(new int[]{rank, seeFile});
+        }
+
+        for (int seeFile = file - 1; fileWithinBounds(seeFile); seeFile--){
+            availableMoves.add(new int[]{rank, seeFile});
+        }
+
         return availableMoves;
     }
 
     public static ArrayList<int[]> getQueenMoves(int rank, int file, int colour){
         ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+
+        for (int seeRank = rank + 1; rankWithinBounds(seeRank); seeRank++){
+            availableMoves.add(new int[]{seeRank, file});
+        }
+
+        for (int seeRank = rank - 1; rankWithinBounds(seeRank); seeRank--){
+            availableMoves.add(new int[]{seeRank, file});
+        }
+
+        for (int seeFile = file + 1; fileWithinBounds(seeFile); seeFile++){
+            availableMoves.add(new int[]{rank, seeFile});
+        }
+
+        for (int seeFile = file - 1; fileWithinBounds(seeFile); seeFile--){
+            availableMoves.add(new int[]{rank, seeFile});
+        }
+
+        for (int seeRank = rank - 1, seeFile = file - 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank--, seeFile--){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank - 1, seeFile = file + 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank--, seeFile++){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank + 1, seeFile = file + 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank++, seeFile++){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
+        for (int seeRank = rank + 1, seeFile = file - 1; rankWithinBounds(seeRank) && fileWithinBounds(seeFile); seeRank++, seeFile--){
+            availableMoves.add(new int[]{seeRank, seeFile});
+        }
+
         return availableMoves;
     }
 
