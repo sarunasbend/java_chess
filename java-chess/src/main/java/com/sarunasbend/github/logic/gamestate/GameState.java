@@ -2,7 +2,6 @@ package com.sarunasbend.github.logic.gamestate;
 
 import com.sarunasbend.github.logic.movevalidator.*;
 import com.sarunasbend.github.bridge.IPCEvents;
-import com.sarunasbend.github.bridge.IPCLogic;
 import com.sarunasbend.github.bridge.IPCUI;
 import com.sarunasbend.github.logic.chessboard.Chessboard;
 import com.sarunasbend.github.logic.pieces.Bishop;
@@ -12,15 +11,7 @@ import com.sarunasbend.github.logic.pieces.Pawn;
 import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.logic.pieces.Queen;
 import com.sarunasbend.github.logic.pieces.Rook;
-import com.sarunasbend.github.ui.pieces.BishopUI;
-import com.sarunasbend.github.ui.pieces.KingUI;
-import com.sarunasbend.github.ui.pieces.KnightUI;
-import com.sarunasbend.github.ui.pieces.PawnUI;
-import com.sarunasbend.github.ui.pieces.PieceUI;
-import com.sarunasbend.github.ui.pieces.QueenUI;
-import com.sarunasbend.github.ui.pieces.RookUI;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class GameState {
     // creation of bufferedimage
