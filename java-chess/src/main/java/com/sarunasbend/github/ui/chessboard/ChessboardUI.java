@@ -51,7 +51,7 @@ public class ChessboardUI extends JPanel {
         g2d.drawImage(chessboardImage, 0, 0, Constants.CHESSBOARD_WIDTH, Constants.CHESSBOARD_HEIGHT, this);
 
         if (isShowingAvailableMoves){
-            g2d.setColor(Color.RED);
+            g2d.setColor(Constants.HIGHLIGHT_COLOR);
             for (Shape move : availableMovesPointers){
                 g2d.fill(move);
             }
@@ -79,7 +79,11 @@ public class ChessboardUI extends JPanel {
         int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
         
         for (int[] move : availableMoves){
-            availableMovesPointers.add(new Ellipse2D.Double(move[1] * blockSize, move[0] * blockSize, 20, 20));
+            int x = (move[1] * blockSize) + (blockSize / 4);
+            int y = (move[0] * blockSize) + (blockSize / 4);
+            int width = blockSize / 2;
+            int height = blockSize / 2;
+            availableMovesPointers.add(new Ellipse2D.Double(x, y, width, height));
         }        
     }
 }
