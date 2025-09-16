@@ -10,6 +10,8 @@ import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
 
 public class Pawn extends Piece{
+    private boolean hasMoved = false;
+
     public Pawn(int colour, int rank, int file){
         super(colour, rank, file);
     }
@@ -38,8 +40,19 @@ public class Pawn extends Piece{
                 setRank(moveToMake[0]);
                 setFile(moveToMake[1]);
                 
+                // prevents 2 moves for pawns after first move
+                firstMove();
                 return;
             }
         }
     }
+
+    // call after the first move
+    public void firstMove(){
+        hasMoved = true;
+    }
+
+    // checks to see if the user has moved this piece before
+    public boolean hasMoved(){return this.hasMoved;}
+
 }
