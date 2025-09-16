@@ -14,10 +14,11 @@ public class UIManager {
 
     public void init(){
         window = new JFrame();        
-        window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        window.setSize(Constants.WINDOW_WIDTH + Constants.WINDOW_WIDTH / 4, Constants.WINDOW_HEIGHT);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLayout(null);
         window.add(JavaChess.chessUiManager);
-
+        window.add(JavaChess.sideBar);
     }
 }

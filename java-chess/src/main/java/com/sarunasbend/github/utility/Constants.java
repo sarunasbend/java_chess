@@ -4,7 +4,10 @@ import java.awt.Color;
 
 public class Constants {
     public static final int WINDOW_HEIGHT = 837;
-    public static final int WINDOW_WIDTH = 814;
+    public static final int WINDOW_WIDTH = 1085;
+
+    public static final int HEIGHT_PADDING = 37;
+    public static final int WIDTH_PADDING = 14;
 
     public static final int CHESSBOARD_HEIGHT = 800;
     public static final int CHESSBOARD_WIDTH = 800;
