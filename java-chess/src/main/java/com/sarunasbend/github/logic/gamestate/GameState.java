@@ -12,6 +12,7 @@ import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.logic.pieces.Queen;
 import com.sarunasbend.github.logic.pieces.Rook;
 import com.sarunasbend.github.utility.Constants;
+import com.sarunasbend.github.utility.debug.Debug;
 
 public class GameState {
     // creation of bufferedimage
@@ -24,14 +25,18 @@ public class GameState {
 
     public static int playerColour;
     public static int oppositeColour;
+    public static boolean gameFinished = false;
+    public static int playersTurn; 
 
     public GameState(int playerColour){
-        this.playerColour = playerColour;
+        GameState.playerColour = playerColour;
 
         if (playerColour == Constants.WHITE_PIECE){
-            this.oppositeColour = Constants.BLACK_PIECE;
+            GameState.playersTurn = Constants.WHITE_PIECE;
+            GameState.oppositeColour = Constants.BLACK_PIECE;
         } else if (playerColour == Constants.BLACK_PIECE) {
-            this.oppositeColour = Constants.WHITE_PIECE;
+            GameState.playersTurn = Constants.BLACK_PIECE;
+            GameState.oppositeColour = Constants.WHITE_PIECE;
         }
 
         chessboard = new Chessboard();
@@ -49,6 +54,7 @@ public class GameState {
     private void addListeners(){
         IPCUI.handle(IPCEvents.Chessboard.PIECE_MOVED, (args) -> {
             pieceMoved((int) args[0], (int) args[1], (int) args[2], (int) args[3]);
+            changePlayer();
             return null;
         });
     }
@@ -119,5 +125,17 @@ public class GameState {
             System.out.print(file + " ");
         }
         System.out.println();
+    }
+
+    public static void startGame(){
+        Debug.info("Game Started!");
+    }
+
+    public static void changePlayer(){
+        if (playersTurn == Constants.WHITE_PIECE){
+            playersTurn = Constants.BLACK_PIECE;
+        } else {
+            playersTurn = Constants.WHITE_PIECE;
+        } 
     }
 }

@@ -13,6 +13,7 @@ public class JavaChess {
 
     public static void main(String[] args) {
         startUp();
+        GameState.startGame();
     }
 
     public static void startUp(){

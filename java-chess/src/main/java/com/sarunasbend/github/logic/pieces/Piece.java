@@ -1,9 +1,9 @@
 package com.sarunasbend.github.logic.pieces;
 
-import com.sarunasbend.github.logic.chessboard.Chessboard;
+import com.sarunasbend.github.logic.gamestate.GameState;
 
 public abstract class Piece {
-    private final int colour; //white = 0 and black = 1
+    private final int colour;
     private int rank; //this is the row
     private int file; //this is the column
     
@@ -25,4 +25,6 @@ public abstract class Piece {
     public void setRank(int rank){this.rank = rank;}
     public void setFile(int file){this.file = file;}
 
+    // checks to see whether it is the colours' turn to move
+    public boolean isMyTurn(){return GameState.playersTurn == colour;}
 }

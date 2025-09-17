@@ -8,10 +8,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.sarunasbend.github.bridge.IPCEvents;
-import com.sarunasbend.github.bridge.IPCLogic;
-import com.sarunasbend.github.bridge.IPCUI;
-import com.sarunasbend.github.logic.gamestate.GameState;
 import com.sarunasbend.github.logic.pieces.Piece;
 import com.sarunasbend.github.utility.Constants;
 import com.sarunasbend.github.utility.debug.Debug;
@@ -45,13 +41,17 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
             @Override
             public void mouseEntered(MouseEvent event){
                 setBorder(createBorder());
-                onePiece.onPieceSelected();
+                if (onePiece.isMyTurn()){
+                    onePiece.onPieceSelected();
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent event){
                 setBorder(new EmptyBorder(1,0,0,0));
-                onePiece.onPieceUnselected();
+                if (onePiece.isMyTurn()){
+                    onePiece.onPieceUnselected();
+                }
             }
 
             @Override
@@ -60,7 +60,6 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
                     isMouseHeldDown = true;
                     prevX = getX();
                     prevY = getY();
-
                 }
             }
 
@@ -73,9 +72,10 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
 
                 x = (x / blockSize);
                 y = (y / blockSize);
-                String info = Integer.toString(x) + " : " + Integer.toString(y);
-                Debug.info(info);
-                onePiece.onMove(y, x);
+
+                if (onePiece.isMyTurn()){
+                    onePiece.onMove(y, x);
+                }
 
             }
         });

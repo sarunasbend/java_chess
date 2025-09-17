@@ -11,5 +11,7 @@ public class IPCEvents {
         public static final String PIECE_MOVED = PREFIX + "pieceMoved";
 
         public static final String UPDATE_UI = PREFIX + "updateUI";
+
+        public static final String TURN = PREFIX + "turn";
     }
 }
