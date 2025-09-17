@@ -60,6 +60,7 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
                     isMouseHeldDown = true;
                     prevX = getX();
                     prevY = getY();
+
                 }
             }
 
@@ -72,7 +73,8 @@ public class PieceUI<OnePiece extends Piece> extends JLabel {
 
                 x = (x / blockSize);
                 y = (y / blockSize);
-
+                String info = Integer.toString(x) + " : " + Integer.toString(y);
+                Debug.info(info);
                 onePiece.onMove(y, x);
 
             }

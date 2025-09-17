@@ -28,7 +28,6 @@ import com.sarunasbend.github.ui.pieces.PieceUI;
 import com.sarunasbend.github.ui.pieces.QueenUI;
 import com.sarunasbend.github.ui.pieces.RookUI;
 import com.sarunasbend.github.utility.Constants;
-import com.sarunasbend.github.utility.debug.Debug;
 
 public class ChessUIManager extends JLayeredPane {
     private ChessboardUI chessboardUI;
@@ -100,8 +99,11 @@ public class ChessUIManager extends JLayeredPane {
     }
 
     private void updatePieces(int prevRank, int prevFile, int newRank, int newFile){
-
         int blockSize = Constants.CHESSBOARD_HEIGHT / Constants.CHESSBOARD_RANKS;
+
+        if (game[newRank][newFile] != null){
+            remove(game[newRank][newFile]);
+        }
 
         game[newRank][newFile] = game[prevRank][prevFile];
         game[prevRank][prevFile] = null;
