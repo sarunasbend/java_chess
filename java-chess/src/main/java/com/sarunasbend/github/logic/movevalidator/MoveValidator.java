@@ -7,7 +7,7 @@ import com.sarunasbend.github.utility.Constants;
 import java.util.ArrayList;
 
 /**
- * Class that checks for Valid Moves, Captures, Checks, Mates, Promotions, Pins, Castling, and en Passent
+ * Class that checks for Valid Moves, Captures, Checks, Mates, Promotions, Pins, Castling, and en Passant
  * ITS COOKED RIGHT NOW!
  */
 public class MoveValidator {
@@ -79,7 +79,7 @@ public class MoveValidator {
                 availableMoves.add(new int[]{rank + 1, file + 1});
             }
 
-            if (moveWithinBounds(rank + 1, file + 1) && differentTeam(rank + 1, file - 1, colour)){
+            if (moveWithinBounds(rank + 1, file - 1) && differentTeam(rank + 1, file - 1, colour)){
                 availableMoves.add(new int[]{rank + 1, file - 1});
             }
 
@@ -161,11 +161,11 @@ public class MoveValidator {
         ArrayList<int[]> availableMoves = new ArrayList<int[]>();
         
         for (int seeRank = rank + 1; rankWithinBounds(seeRank); seeRank++){
-            if (GameState.game[seeRank][seeRank] != null){
-                if (GameState.game[seeRank][seeRank].getColour() == colour){
+            if (GameState.game[seeRank][file] != null){
+                if (GameState.game[seeRank][file].getColour() == colour){
                     break;
                 } else {
-                    availableMoves.add(new int[]{seeRank, seeRank});
+                    availableMoves.add(new int[]{seeRank, file});
                     break;
                 }
             }
