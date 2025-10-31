@@ -13,9 +13,9 @@ public class RookUI extends PieceUI {
 
     public void init(){
         if (getPiece().getColour() == Constants.WHITE_PIECE){
-            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\rook.png"));
+            setIcon(new ImageIcon("java-chess/src/main/java/com/sarunasbend/github/resources/pieces/rook.png"));
         } else if (getPiece().getColour() == Constants.BLACK_PIECE){
-            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\rook1.png"));
+            setIcon(new ImageIcon("java-chess/src/main/java/com/sarunasbend/github/resources/pieces/rook1.png"));
 
         }
     }

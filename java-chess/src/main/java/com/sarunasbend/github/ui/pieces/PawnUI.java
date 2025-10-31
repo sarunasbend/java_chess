@@ -14,9 +14,9 @@ public class PawnUI extends PieceUI {
     
     public void init(){
         if (getPiece().getColour() == Constants.WHITE_PIECE){
-            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\pawn.png"));
+            setIcon(new ImageIcon("java-chess/src/main/java/com/sarunasbend/github/resources/pieces/pawn.png"));
         } else if (getPiece().getColour() == Constants.BLACK_PIECE){
-            setIcon(new ImageIcon("java-chess\\src\\main\\java\\com\\sarunasbend\\github\\resources\\pieces\\pawn1.png"));
+            setIcon(new ImageIcon("java-chess/src/main/java/com/sarunasbend/github/resources/pieces/pawn1.png"));
         }
     }
 }
